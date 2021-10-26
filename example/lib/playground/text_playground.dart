@@ -1,6 +1,6 @@
 import 'package:example/lib/color_selector.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_neumorphic/flutter_neumorphic.dart';
+import 'package:flutter_neumorphic_null_safety/flutter_neumorphic.dart';
 
 class NeumorphicTextPlayground extends StatefulWidget {
   @override

@@ -1,3 +1,9 @@
+## 3.2.4
+
+* Null safety
+## 3.2.2
+
+* Null safety
 ## 3.1.0
 
 * Null safety

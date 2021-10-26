@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_neumorphic/flutter_neumorphic.dart';
+import 'package:flutter_neumorphic_null_safety/flutter_neumorphic.dart';
 
 import 'theme.dart';
 import 'theme_wrapper.dart';

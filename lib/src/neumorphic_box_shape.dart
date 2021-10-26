@@ -1,7 +1,7 @@
 import 'package:flutter/widgets.dart';
-import 'package:flutter_neumorphic/flutter_neumorphic.dart';
-import 'package:flutter_neumorphic/src/shape/rrect_path_provider.dart';
-import 'package:flutter_neumorphic/src/shape/stadium_path_provider.dart';
+import 'package:flutter_neumorphic_null_safety/flutter_neumorphic.dart';
+import 'package:flutter_neumorphic_null_safety/src/shape/rrect_path_provider.dart';
+import 'package:flutter_neumorphic_null_safety/src/shape/stadium_path_provider.dart';
 
 import 'shape/beveled_path_provider.dart';
 import 'shape/circle_path_provider.dart';

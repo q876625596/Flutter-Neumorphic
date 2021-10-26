@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_neumorphic/flutter_neumorphic.dart';
+import 'package:flutter_neumorphic_null_safety/flutter_neumorphic.dart';
 
 import '../theme/neumorphic_theme.dart';
 import '../widget/app_bar.dart';
@@ -95,8 +95,12 @@ class _NeumorphicButtonState extends State<NeumorphicButton> {
 
     final theme = NeumorphicTheme.currentTheme(context);
     this.initialStyle = widget.style ??
-        (appBarPresent ? theme.appBarTheme.buttonStyle : (theme.buttonStyle ?? const NeumorphicStyle()));
-    depth = widget.style?.depth ?? (appBarPresent ? theme.appBarTheme.buttonStyle.depth : theme.depth) ?? 0.0;
+        (appBarPresent
+            ? theme.appBarTheme.buttonStyle
+            : (theme.buttonStyle ?? const NeumorphicStyle()));
+    depth = widget.style?.depth ??
+        (appBarPresent ? theme.appBarTheme.buttonStyle.depth : theme.depth) ??
+        0.0;
 
     setState(() {});
   }
@@ -195,7 +199,9 @@ class _NeumorphicButtonState extends State<NeumorphicButton> {
         _resetIfTapUp();
       },
       child: AnimatedScale(
-        duration: Duration(milliseconds: 150), //https://github.com/Idean/Flutter-Neumorphic/issues/241
+        duration: Duration(
+            milliseconds:
+                150), //https://github.com/Idean/Flutter-Neumorphic/issues/241
         scale: _getScale(),
         child: Neumorphic(
           margin: widget.margin ?? const EdgeInsets.all(0),
@@ -225,9 +231,13 @@ class _NeumorphicButtonState extends State<NeumorphicButton> {
   double _getScale() {
     if (widget.pressed != null) {
       //defined by the widget that use it
-      return widget.pressed! ? NeumorphicButton.PRESSED_SCALE : NeumorphicButton.UNPRESSED_SCALE;
+      return widget.pressed!
+          ? NeumorphicButton.PRESSED_SCALE
+          : NeumorphicButton.UNPRESSED_SCALE;
     } else {
-      return this.pressed ? NeumorphicButton.PRESSED_SCALE : NeumorphicButton.UNPRESSED_SCALE;
+      return this.pressed
+          ? NeumorphicButton.PRESSED_SCALE
+          : NeumorphicButton.UNPRESSED_SCALE;
     }
   }
 }
