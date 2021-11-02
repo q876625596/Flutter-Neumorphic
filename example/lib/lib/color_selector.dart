@@ -6,8 +6,8 @@ import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 
 @immutable
 class ColorSelector extends StatelessWidget {
-  final Color color;
-  final ValueChanged<Color> onColorChanged;
+  final Color? color;
+  final ValueChanged<Color>? onColorChanged;
   final double height;
   final double width;
 

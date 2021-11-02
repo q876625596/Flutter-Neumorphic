@@ -61,6 +61,7 @@ class FullSampleHomePage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 mainAxisSize: MainAxisSize.max,
                 children: [
+                  NeumorphicButtonIcon(),
                   _buildButton(
                     text: "Neumorphic Playground",
                     onClick: () {

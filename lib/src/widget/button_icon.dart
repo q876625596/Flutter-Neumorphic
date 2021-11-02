@@ -4,48 +4,13 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_neumorphic_null_safety/flutter_neumorphic.dart';
 
 import '../theme/neumorphic_theme.dart';
-import '../widget/app_bar.dart';
-
+import 'app_bar.dart';
 //import 'animation/animated_scale.dart';
 //https://github.com/Idean/Flutter-Neumorphic/issues/241
 import 'container.dart';
 
-typedef void NeumorphicButtonClickListener();
 
-/// A Neumorphic Button
-///
-/// When pressed, it will fire a call to its [NeumorphicButtonClickListener] click parameter
-/// The animation starts from style.depth (or theme.depth is not defined in the style)
-/// @see [NeumorphicStyle]
-///
-/// And finished to `minDistance`, in [duration] (time)
-///
-/// You can force the pressed state using [pressed]
-/// - true : forced as pressed
-/// - false : forced as unpressed
-/// - null : can be pressed by user
-///
-/// It takes a [padding], default EdgeInsets.symmetric(horizontal: 8, vertical: 4)`
-///
-/// It takes a [NeumorphicStyle] @see [Neumorphi]
-///
-/// ```
-///  NeumorphicButton(
-///          onClick: () {
-///            setState(() {
-///               ...
-///            });
-///          },
-///          boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(12)),
-///          style: NeumorphicStyle(
-///            shape: NeumorphicShape.flat,
-///          ),
-///          child: ...
-///  )
-/// ```
-///
-@immutable
-class NeumorphicButton extends StatefulWidget {
+class NeumorphicButtonIcon extends StatefulWidget {
   static const double PRESSED_SCALE = 0.98;
   static const double UNPRESSED_SCALE = 1.0;
 
@@ -62,7 +27,7 @@ class NeumorphicButton extends StatefulWidget {
   final bool provideHapticFeedback;
   final String? tooltip;
 
-  NeumorphicButton({
+  NeumorphicButtonIcon({
     Key? key,
     this.padding,
     this.margin = EdgeInsets.zero,
@@ -82,10 +47,10 @@ class NeumorphicButton extends StatefulWidget {
   bool get isEnabled => onPressed != null;
 
   @override
-  _NeumorphicButtonState createState() => _NeumorphicButtonState();
+  _NeumorphicButtonIconState createState() => _NeumorphicButtonIconState();
 }
 
-class _NeumorphicButtonState extends State<NeumorphicButton> {
+class _NeumorphicButtonIconState extends State<NeumorphicButton> {
   late NeumorphicStyle initialStyle;
 
   late double depth;
@@ -95,8 +60,13 @@ class _NeumorphicButtonState extends State<NeumorphicButton> {
     final appBarPresent = NeumorphicAppBarTheme.of(context) != null;
 
     final theme = NeumorphicTheme.currentTheme(context);
-    this.initialStyle = widget.style ?? (appBarPresent ? theme.appBarTheme.buttonStyle : (theme.buttonStyle ?? const NeumorphicStyle()));
-    depth = widget.style?.depth ?? (appBarPresent ? theme.appBarTheme.buttonStyle.depth : theme.depth) ?? 0.0;
+    this.initialStyle = widget.style ??
+        (appBarPresent
+            ? theme.appBarTheme.buttonStyle
+            : (theme.buttonStyle ?? const NeumorphicStyle()));
+    depth = widget.style?.depth ??
+        (appBarPresent ? theme.appBarTheme.buttonStyle.depth : theme.depth) ??
+        0.0;
 
     setState(() {});
   }
@@ -175,48 +145,45 @@ class _NeumorphicButtonState extends State<NeumorphicButton> {
   Widget _build(BuildContext context) {
     final appBarPresent = NeumorphicAppBarTheme.of(context) != null;
     final appBarTheme = NeumorphicTheme.currentTheme(context).appBarTheme;
-
-    return AnimatedScale(
-      duration: Duration(milliseconds: 150), //https://github.com/Idean/Flutter-Neumorphic/issues/241
-      scale: _getScale(),
-      child: Neumorphic(
-          margin: widget.margin ?? const EdgeInsets.all(0),
-          drawSurfaceAboveChild: widget.drawSurfaceAboveChild,
-          duration: widget.duration,
-          curve: widget.curve,
-          style: initialStyle.copyWith(
-            depth: _getDepth(),
-          ),
-          child: Material(
-            color: NeumorphicTheme.currentTheme(context).baseColor,
-            child: InkWell(
-              hoverColor: Colors.white.withOpacity(0.5),
-              splashColor: NeumorphicTheme.currentTheme(context).baseColor,
-              focusColor: NeumorphicTheme.currentTheme(context).baseColor,
-              highlightColor: NeumorphicTheme.currentTheme(context).baseColor,
-              child: Container(
-                padding: widget.padding ?? (appBarPresent ? appBarTheme.buttonPadding : null) ?? const EdgeInsets.symmetric(horizontal: 18, vertical: 10),
-                child: widget.child,
-              ),
-              onTapDown: (detail) {
-                hasTapUp = false;
-                if (clickable && !pressed) {
-                  _handlePress();
-                }
-              },
-              onTap: () {
-                if (clickable) {
-                  widget.onPressed!();
-                }
-                hasTapUp = true;
-                _resetIfTapUp();
-              },
-              onTapCancel: () {
-                hasTapUp = true;
-                _resetIfTapUp();
-              },
+    return Material(
+      color: NeumorphicTheme.currentTheme(context).baseColor,
+      child: InkWell(
+        hoverColor: Colors.white.withOpacity(0.5),
+        splashColor: NeumorphicTheme.currentTheme(context).baseColor,
+        focusColor: NeumorphicTheme.currentTheme(context).baseColor,
+        highlightColor: NeumorphicTheme.currentTheme(context).baseColor,
+        child: AnimatedScale(
+          duration: Duration(milliseconds: 150), //https://github.com/Idean/Flutter-Neumorphic/issues/241
+          scale: _getScale(),
+          child: Neumorphic(
+            margin: widget.margin ?? const EdgeInsets.all(0),
+            drawSurfaceAboveChild: widget.drawSurfaceAboveChild,
+            duration: widget.duration,
+            curve: widget.curve,
+            style: initialStyle.copyWith(
+              depth: _getDepth(),
+              boxShape: NeumorphicBoxShape.path(NeumorphicFlutterLogoPathProvider()),
             ),
-          ),),
+            child: widget.child,),
+        ),
+        onTapDown: (detail) {
+          hasTapUp = false;
+          if (clickable && !pressed) {
+            _handlePress();
+          }
+        },
+        onTap: () {
+          if (clickable) {
+            widget.onPressed!();
+          }
+          hasTapUp = true;
+          _resetIfTapUp();
+        },
+        onTapCancel: () {
+          hasTapUp = true;
+          _resetIfTapUp();
+        },
+      ),
     );
   }
 
@@ -231,9 +198,13 @@ class _NeumorphicButtonState extends State<NeumorphicButton> {
   double _getScale() {
     if (widget.pressed != null) {
       //defined by the widget that use it
-      return widget.pressed! ? NeumorphicButton.PRESSED_SCALE : NeumorphicButton.UNPRESSED_SCALE;
+      return widget.pressed!
+          ? NeumorphicButton.PRESSED_SCALE
+          : NeumorphicButton.UNPRESSED_SCALE;
     } else {
-      return this.pressed ? NeumorphicButton.PRESSED_SCALE : NeumorphicButton.UNPRESSED_SCALE;
+      return this.pressed
+          ? NeumorphicButton.PRESSED_SCALE
+          : NeumorphicButton.UNPRESSED_SCALE;
     }
   }
 }

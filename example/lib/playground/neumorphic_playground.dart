@@ -30,7 +30,7 @@ class _Page extends StatefulWidget {
 class __PageState extends State<_Page> {
   LightSource lightSource = LightSource.topLeft;
   NeumorphicShape shape = NeumorphicShape.flat;
-  NeumorphicBoxShape boxShape;
+  NeumorphicBoxShape? boxShape;
   double depth = 5;
   double intensity = 0.5;
   double surfaceIntensity = 0.5;
@@ -216,7 +216,7 @@ class __PageState extends State<_Page> {
         return childCustomizer();
         break;
     }
-    return null;
+    return Container();
   }
 
   Widget styleCustomizer() {
@@ -269,7 +269,7 @@ class __PageState extends State<_Page> {
         ColorSelector(
           onColorChanged: (color) {
             setState(() {
-              NeumorphicTheme.of(context)
+              NeumorphicTheme.of(context)!
                   .updateCurrentTheme(NeumorphicThemeData(baseColor: color));
             });
           },
@@ -431,7 +431,7 @@ class __PageState extends State<_Page> {
             value: this.haveNeumorphicChild,
             onChanged: (value) {
               setState(() {
-                haveNeumorphicChild = value;
+                haveNeumorphicChild = value!;
               });
             },
           ),
@@ -457,7 +457,7 @@ class __PageState extends State<_Page> {
             value: this.drawAboveChild,
             onChanged: (value) {
               setState(() {
-                drawAboveChild = value;
+                drawAboveChild = value!;
               });
             },
           ),
@@ -483,7 +483,7 @@ class __PageState extends State<_Page> {
             value: this.childOppositeLightsourceChild,
             onChanged: (value) {
               setState(() {
-                childOppositeLightsourceChild = value;
+                childOppositeLightsourceChild = value!;
               });
             },
           ),
@@ -529,7 +529,7 @@ class __PageState extends State<_Page> {
   }
 
   Widget cornerRadiusSelector() {
-    if (boxShape.isRoundRect || boxShape.isBeveled) {
+    if (boxShape!.isRoundRect || boxShape!.isBeveled) {
       return Row(
         children: <Widget>[
           Padding(
@@ -544,11 +544,11 @@ class __PageState extends State<_Page> {
               onChanged: (value) {
                 setState(() {
                   cornerRadius = value;
-                  if (boxShape.isRoundRect) {
+                  if (boxShape!.isRoundRect) {
                     boxShape = NeumorphicBoxShape.roundRect(
                         BorderRadius.circular(this.cornerRadius));
                   }
-                  if (boxShape.isBeveled) {
+                  if (boxShape!.isBeveled) {
                     boxShape = NeumorphicBoxShape.beveled(
                         BorderRadius.circular(this.cornerRadius));
                   }
@@ -643,13 +643,13 @@ class __PageState extends State<_Page> {
                       BorderRadius.circular(this.cornerRadius));
                 });
               },
-              color: boxShape.isRoundRect
+              color: boxShape!.isRoundRect
                   ? buttonActiveColor
                   : buttonInnactiveColor,
               child: Text(
                 "Rect",
                 style: TextStyle(
-                    color: boxShape.isRoundRect
+                    color: boxShape!.isRoundRect
                         ? textActiveColor
                         : textInactiveColor),
               ),
@@ -669,11 +669,11 @@ class __PageState extends State<_Page> {
                 });
               },
               color:
-                  boxShape.isBeveled ? buttonActiveColor : buttonInnactiveColor,
+                  boxShape!.isBeveled ? buttonActiveColor : buttonInnactiveColor,
               child: Text(
                 "Beveled",
                 style: TextStyle(
-                    color: boxShape.isBeveled
+                    color: boxShape!.isBeveled
                         ? textActiveColor
                         : textInactiveColor),
               ),
@@ -692,11 +692,11 @@ class __PageState extends State<_Page> {
                 });
               },
               color:
-                  boxShape.isCircle ? buttonActiveColor : buttonInnactiveColor,
+                  boxShape!.isCircle ? buttonActiveColor : buttonInnactiveColor,
               child: Text(
                 "Circle",
                 style: TextStyle(
-                    color: boxShape.isCircle
+                    color: boxShape!.isCircle
                         ? textActiveColor
                         : textInactiveColor),
               ),
@@ -715,11 +715,11 @@ class __PageState extends State<_Page> {
                 });
               },
               color:
-                  boxShape.isStadium ? buttonActiveColor : buttonInnactiveColor,
+                  boxShape!.isStadium ? buttonActiveColor : buttonInnactiveColor,
               child: Text(
                 "Stadium",
                 style: TextStyle(
-                    color: boxShape.isStadium
+                    color: boxShape!.isStadium
                         ? textActiveColor
                         : textInactiveColor),
               ),
@@ -738,13 +738,13 @@ class __PageState extends State<_Page> {
                       NeumorphicFlutterLogoPathProvider());
                 });
               },
-              color: boxShape.isCustomPath
+              color: boxShape!.isCustomPath
                   ? buttonActiveColor
                   : buttonInnactiveColor,
               child: Text(
                 "Custom",
                 style: TextStyle(
-                    color: boxShape.isCustomPath
+                    color: boxShape!.isCustomPath
                         ? textActiveColor
                         : textInactiveColor),
               ),

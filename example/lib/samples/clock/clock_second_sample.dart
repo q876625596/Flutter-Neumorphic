@@ -147,7 +147,7 @@ class AlarmCell extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text(
-                      alarm.time,
+                      alarm.time!,
                       style: TextStyle(
                         fontWeight: FontWeight.w700,
                         fontSize: 36,
@@ -162,7 +162,7 @@ class AlarmCell extends StatelessWidget {
                     ),
                     SizedBox(height: 4),
                     Text(
-                      alarm.label,
+                      alarm.label!,
                       style: TextStyle(
                         fontWeight: FontWeight.w300,
                         fontSize: 14,
@@ -189,7 +189,7 @@ class AlarmCell extends StatelessWidget {
                           style: NeumorphicSwitchStyle(
                               inactiveTrackColor: Color(0xffC1CDE5)),
                           height: 30,
-                          value: alarm.enabled,
+                          value: alarm.enabled!,
                         ),
                       ),
                     ),
@@ -225,9 +225,9 @@ class _Divider extends StatelessWidget {
 }
 
 class Alarm {
-  final bool enabled;
-  final String time;
-  final String label;
+  final bool? enabled;
+  final String? time;
+  final String? label;
 
   const Alarm({
     @required this.enabled,

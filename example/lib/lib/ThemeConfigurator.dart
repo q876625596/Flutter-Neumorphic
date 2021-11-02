@@ -48,7 +48,7 @@ class ThemeConfigurator extends StatelessWidget {
 }
 
 class _ThemeConfiguratorDialog extends StatefulWidget {
-  final BuildContext contextContainingTheme;
+  final BuildContext? contextContainingTheme;
 
   _ThemeConfiguratorDialog({this.contextContainingTheme});
 
@@ -71,7 +71,7 @@ class _ThemeConfiguratorState extends State<_ThemeConfiguratorDialog> {
   }
 
   Widget intensitySelector() {
-    final intensity = NeumorphicTheme.intensity(widget.contextContainingTheme);
+    final intensity = NeumorphicTheme.intensity(widget.contextContainingTheme!);
     return Row(
       children: <Widget>[
         Padding(
@@ -82,12 +82,12 @@ class _ThemeConfiguratorState extends State<_ThemeConfiguratorDialog> {
           child: Slider(
             min: Neumorphic.MIN_INTENSITY, //in case of != 0
             max: Neumorphic.MAX_INTENSITY,
-            value: intensity,
+            value: intensity!,
             onChanged: (value) {
               setState(() {
                 NeumorphicTheme.update(
-                  widget.contextContainingTheme,
-                  (current) => current.copyWith(
+                  widget.contextContainingTheme!,
+                  (current) => current!.copyWith(
                     intensity: value,
                   ),
                 );
@@ -107,7 +107,7 @@ class _ThemeConfiguratorState extends State<_ThemeConfiguratorDialog> {
   }
 
   Widget depthSelector() {
-    final depth = NeumorphicTheme.depth(widget.contextContainingTheme);
+    final depth = NeumorphicTheme.depth(widget.contextContainingTheme!);
 
     return Row(
       children: <Widget>[
@@ -119,12 +119,12 @@ class _ThemeConfiguratorState extends State<_ThemeConfiguratorDialog> {
           child: Slider(
             min: Neumorphic.MIN_DEPTH,
             max: Neumorphic.MAX_DEPTH,
-            value: depth,
+            value: depth!,
             onChanged: (value) {
               setState(() {
                 NeumorphicTheme.update(
-                  widget.contextContainingTheme,
-                  (current) => current.copyWith(depth: value),
+                  widget.contextContainingTheme!,
+                  (current) => current!.copyWith(depth: value),
                 );
               });
             },

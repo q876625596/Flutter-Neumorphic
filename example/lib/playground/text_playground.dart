@@ -210,7 +210,7 @@ class __PageState extends State<_Page> {
         return elementCustomizer();
         break;
     }
-    return null;
+    return Container();
   }
 
   Widget styleCustomizer() {
@@ -327,7 +327,7 @@ class __PageState extends State<_Page> {
         ColorSelector(
           onColorChanged: (color) {
             setState(() {
-              NeumorphicTheme.of(context)
+              NeumorphicTheme.of(context)!
                   .updateCurrentTheme(NeumorphicThemeData(baseColor: color));
             });
           },
